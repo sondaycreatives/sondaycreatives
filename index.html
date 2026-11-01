@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Sonday Creatives: event photography and videography in Kenya. Conferences, associations and launches. Daily selects and highlight reels within 24 hours.">
+<meta property="og:title" content="Sonday Creatives">
+<meta property="og:description" content="Event photography and videography in Kenya.">
+<meta name="theme-color" content="#0D1117">
+<link rel="icon" href="assets/logo/favicon.png">
+<title>Sonday Creatives</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: Swiss grid with hairline rules. Sticky index bar, hero slideshow, project index with hover preview, photo wall + lightbox, reel rail, services list. Night default, Day alternate. */
+:root{
+  --bg:#0D1117; --fg:#F2F3F5; --mut:#8C94A3; --line:#2A313C; --surf:#141A22; --inv:#FFFFFF; --inv-fg:#0D1117;
+  --acc:#FF2D55;
+  --lg-n:block;--lg-d:none;
+  --grad:linear-gradient(90deg,#FF2D55,#FF7A00,#FFD600,#88D645,#0082CA,#5E2B97);
+  --f-sans:"Hanken Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --gut:max(16px,3vw);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){--bg:#FFFFFF;--fg:#0D1117;--mut:#5F6775;--line:#D3D7DE;--surf:#F1F2F4;--inv:#0D1117;--inv-fg:#FFFFFF;--lg-n:none;--lg-d:block;color-scheme:light}
+}
+:root[data-theme="light"]{--bg:#FFFFFF;--fg:#0D1117;--mut:#5F6775;--line:#D3D7DE;--surf:#F1F2F4;--inv:#0D1117;--inv-fg:#FFFFFF;--lg-n:none;--lg-d:block;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-sans);font-size:13px;line-height:1.45;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+h1,h2,h3,p{margin:0}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+.mut{color:var(--mut)}
+.wrap{padding-inline:var(--gut)}
+.sec{border-top:1px solid var(--line);padding-block:1.2rem 3rem}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:1.4rem;flex-wrap:wrap}
+.sec-h h2{font-size:13px;font-weight:700;letter-spacing:.02em}
+
+/* bar */
+.prog{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;background:transparent}
+.prog i{display:block;height:100%;width:100%;background:var(--grad);transform:scaleX(0);transform-origin:left}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:1.4rem;padding:.7rem var(--gut)}
+.brand{display:flex;align-items:center;gap:.6rem;font-weight:800;letter-spacing:-.01em;font-size:14px}
+.brand{line-height:0}.brand img{height:46px;width:auto}
+.lgN{display:var(--lg-n)}.lgD{display:var(--lg-d)}
+.bar nav{display:flex;gap:1.1rem;margin-left:auto}
+.bar nav a{color:var(--mut)}
+.bar nav a:hover,.bar nav a.on{color:var(--fg)}
+.tog{display:flex;border:1px solid var(--line)}
+.tog button{padding:.3rem .6rem;color:var(--mut)}
+.tog button[aria-pressed="true"]{background:var(--inv);color:var(--inv-fg)}
+.clock{color:var(--mut)}
+@media (max-width:760px){.bar nav,.clock{display:none}.tog{margin-left:auto}}
+
+/* marquee */
+.mq{overflow:hidden;border-bottom:1px solid var(--line);white-space:nowrap}
+.mq div{display:inline-block;padding-block:.5rem;animation:mq 38s linear infinite}
+.mq span{margin-right:2.2rem}
+.mq span::after{content:"/";margin-left:2.2rem;color:var(--acc)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--gut);padding-block:2rem 2.4rem}
+.hero h1{font-weight:800;font-size:clamp(3rem,9.5vw,9.5rem);line-height:.86;letter-spacing:-.055em;text-transform:uppercase}
+.hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .l{display:flex;flex-direction:column;justify-content:space-between;gap:2rem;min-width:0}
+.hero .l p{max-width:26rem;color:var(--mut)}
+.cta{display:flex;gap:.6rem;flex-wrap:wrap}
+.btn{border:1px solid var(--fg);padding:.55rem .9rem;font-weight:700;transition:background .15s,color .15s}
+.btn:hover{background:var(--fg);color:var(--bg)}
+.btn.fill{background:var(--fg);color:var(--bg)}
+.btn.fill:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.show{position:relative;min-width:0}
+.show .fr{aspect-ratio:3/2}
+.show .meta{display:flex;justify-content:space-between;gap:1rem;margin-top:.5rem;flex-wrap:wrap}
+.pips{display:flex;gap:4px;margin-top:.5rem}
+.pips button{flex:1;height:3px;background:var(--line);position:relative;overflow:hidden}
+.pips button i{position:absolute;inset:0;background:var(--fg);transform:scaleX(0);transform-origin:left}
+.pips button.on i{animation:pip var(--d,4500ms) linear forwards}
+.pips.paused button.on i{animation-play-state:paused}
+@keyframes pip{to{transform:scaleX(1)}}
+@media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}}
+
+/* frame placeholders */
+.fr{position:relative;overflow:hidden;background:var(--surf);width:100%;max-width:100%}
+.fr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fr .ph{position:absolute;inset:0;background:var(--g);display:flex;align-items:flex-end;justify-content:space-between;padding:.6rem;color:#fff}
+.fr .ph::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 1px,transparent 1px 14px)}
+.fr .ph span{position:relative;font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.fr .ph b{position:absolute;top:.6rem;left:.6rem;font-family:var(--f-mono);font-size:10px;font-weight:500;border:1px solid rgba(255,255,255,.7);padding:.1rem .35rem}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+.stats div{padding:1rem var(--gut) 1.2rem;border-right:1px solid var(--line)}
+.stats div:last-child{border-right:0}
+.stats b{display:block;font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-.05em;line-height:1}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stats div:nth-child(2){border-right:0}.stats div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+
+/* index */
+.idx{border-top:1px solid var(--line)}
+.ir{border-bottom:1px solid var(--line)}
+.ir>button{width:100%;display:grid;grid-template-columns:2.2rem minmax(0,1fr) 9rem 8rem 1.4rem;gap:1rem;align-items:baseline;padding-block:.85rem;text-align:left}
+.ir h3{font-size:clamp(1.05rem,2.4vw,1.7rem);font-weight:700;letter-spacing:-.02em;line-height:1.1;transition:transform .2s}
+.ir>button:hover h3{transform:translateX(.5rem)}
+.ir .pl{transition:transform .2s;justify-self:end}
+.ir.open .pl{transform:rotate(45deg)}
+.ir .det{display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;padding-bottom:1rem}
+.ir.open .det{display:grid}
+.ir .det .lk{grid-column:1/-1;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.ir .det a{border-bottom:1px solid var(--fg)}
+.ir .det a:hover{color:var(--acc);border-color:var(--acc)}
+@media (max-width:700px){.ir>button{grid-template-columns:1.8rem minmax(0,1fr) 1.2rem}.ir>button .c3,.ir>button .c4{display:none}}
+.pv{position:fixed;z-index:40;width:220px;aspect-ratio:3/2;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.92);transition:opacity .15s,transform .15s}
+.pv.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+@media (pointer:coarse){.pv{display:none}}
+
+/* wall */
+.chips{display:flex;gap:.4rem;flex-wrap:wrap}
+.chips button{border:1px solid var(--line);padding:.25rem .65rem;color:var(--mut)}
+.chips button:hover{color:var(--fg);border-color:var(--fg)}
+.chips button[aria-pressed="true"]{background:var(--inv);color:var(--inv-fg);border-color:var(--inv)}
+.wall{columns:4 10rem;column-gap:.5rem}
+.wall button{display:block;width:100%;margin:0 0 .5rem;break-inside:avoid;position:relative;text-align:left}
+.wall button .fr{transition:filter .2s}
+.wall:hover button:not(:hover) .fr{filter:grayscale(1) brightness(.6)}
+.wall button .cap{position:absolute;left:0;right:0;bottom:0;padding:.5rem .6rem;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;opacity:0;transition:opacity .2s;z-index:2}
+.wall button:hover .cap,.wall button:focus-visible .cap{opacity:1}
+
+/* reels */
+.rail{display:flex;gap:.6rem;overflow-x:auto;padding-bottom:.8rem;scroll-snap-type:x proximity}
+.reel{flex:0 0 auto;width:clamp(10.5rem,22vw,14rem);scroll-snap-align:start;display:flex;flex-direction:column;gap:.5rem}
+.reel .fr{aspect-ratio:9/16}
+.reel .sweep{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.28) 50%,transparent 65%);transform:translateX(-120%);z-index:2}
+.reel:hover .sweep{animation:sw 1.1s ease-in-out infinite}
+@keyframes sw{to{transform:translateX(120%)}}
+.reel .pb{position:absolute;inset:0;display:grid;place-items:center;z-index:3}
+.reel .pb i{width:3rem;height:3rem;border-radius:50%;border:1px solid #fff;display:grid;place-items:center;color:#fff;font-style:normal;transition:transform .2s,background .2s}
+.reel:hover .pb i{transform:scale(1.15);background:rgba(255,255,255,.2)}
+.reel .tag{position:absolute;top:.6rem;right:.6rem;z-index:3;background:#0D1117;color:#fff;padding:.1rem .4rem}
+.reel h3{font-size:13px;font-weight:700;line-height:1.2}
+
+/* services */
+.svc details{border-bottom:1px solid var(--line)}
+.svc details:first-child{border-top:1px solid var(--line)}
+.svc summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) 1.4rem;gap:1rem;align-items:baseline;padding-block:.8rem;font-size:clamp(1.05rem,2.4vw,1.7rem);font-weight:700;letter-spacing:-.02em}
+.svc summary::-webkit-details-marker{display:none}
+.svc summary::after{content:"+";justify-self:end;font-weight:400;transition:transform .2s}
+.svc details[open] summary::after{transform:rotate(45deg)}
+.svc summary:hover{color:var(--acc)}
+.svc .b{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem;padding-bottom:1.1rem;color:var(--mut)}
+.svc .b p{max-width:30rem}
+@media (max-width:700px){.svc .b{grid-template-columns:minmax(0,1fr);gap:.5rem}}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut);margin-top:2.2rem}
+.how div{border-top:3px solid var(--fg);padding-top:.6rem}
+.how h3{font-size:13px;font-weight:700;margin-bottom:.3rem}
+.how p{color:var(--mut)}
+@media (max-width:700px){.how{grid-template-columns:minmax(0,1fr)}}
+
+/* clients + contact */
+.cl{display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;font-size:clamp(1.1rem,3vw,2rem);font-weight:700;letter-spacing:-.03em}
+.cl span{transition:color .15s}
+.cl span:hover{color:var(--acc)}
+.ct{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:var(--gut);align-items:end}
+.ct h2{font-size:clamp(2.6rem,9vw,8.5rem);font-weight:800;line-height:.86;letter-spacing:-.055em;text-transform:uppercase}
+.ct .r{display:flex;flex-direction:column;gap:.6rem;min-width:0}
+.ct .r div{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);padding-bottom:.5rem;flex-wrap:wrap;overflow-wrap:anywhere}
+@media (max-width:760px){.ct{grid-template-columns:minmax(0,1fr)}}
+.foot{border-top:1px solid var(--line);padding-block:.9rem 1.4rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:var(--mut)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:70;background:var(--bg);display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding:max(.8rem,env(safe-area-inset-top,0px)) var(--gut) max(.8rem,env(safe-area-inset-bottom,0px))}
+.lb[hidden]{display:none!important}
+.lb .t,.lb .bt{display:flex;justify-content:space-between;gap:1rem;align-items:center}
+.lb .st{display:grid;place-items:center;min-height:0;padding-block:.8rem}
+.lb .st .fr{max-height:100%;width:auto;max-width:100%}
+.lb button{border:1px solid var(--line);padding:.35rem .7rem}
+.lb button:hover{border-color:var(--fg)}
+
+/* player modal */
+.pm{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.86);display:grid;place-items:center;padding:max(1rem,env(safe-area-inset-top,0px)) 1rem max(1rem,env(safe-area-inset-bottom,0px))}
+.pm[hidden]{display:none!important}
+.pm .box{background:var(--bg);border:1px solid var(--line);width:min(100%,var(--w,420px));max-height:100%;display:flex;flex-direction:column}
+.pm .hd{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.6rem .8rem;border-bottom:1px solid var(--line)}
+.pm .hd b{font-weight:700;font-size:13px}
+.pm .hd button{border:1px solid var(--line);padding:.25rem .6rem}
+.pm .hd button:hover{border-color:var(--fg)}
+.pm .vp{position:relative;width:100%;aspect-ratio:var(--ar,9/16);max-height:calc(100vh - 9rem);background:#000;margin-inline:auto}
+.pm .vp iframe,.pm .vp video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.pm .ft{padding:.6rem .8rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:var(--mut)}
+.pm .ft a{border-bottom:1px solid var(--fg);color:var(--fg)}
+.pm .ft a:hover{color:var(--acc);border-color:var(--acc)}
+.reel .vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s;z-index:1}
+.reel:hover .vid{opacity:1}
+.films{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,16rem),1fr));gap:.6rem}
+.film{display:flex;flex-direction:column;gap:.5rem;text-align:left}
+.film .fr{aspect-ratio:16/9}
+.film .fr img{transition:transform .4s}
+.film:hover .fr img{transform:scale(1.04)}
+.film .pb{position:absolute;inset:0;display:grid;place-items:center;z-index:3}
+.film .pb i{width:3rem;height:3rem;border-radius:50%;border:1px solid #fff;display:grid;place-items:center;color:#fff;font-style:normal;background:rgba(0,0,0,.35)}
+.film h3{font-size:13px;font-weight:700}
+.ftlogo{height:60px;width:auto}
+.hero .show .fr img{transition:transform 6s ease-out}
+.reel .fr img.th{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (prefers-reduced-motion:reduce){.mq div,.reel:hover .sweep{animation:none}.pips button.on i{animation:none;transform:scaleX(1)}html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+
+<style>.reel{text-align:left;background:none;border:0;padding:0}.reel h3{margin-top:.1rem}.film{background:none;border:0;padding:0}.ir .det .fr{width:100%}.pl-btn:hover{color:var(--acc);border-color:var(--acc)!important}</style>
+</head>
+<body>
+<div class="prog" aria-hidden="true"><i id="prog"></i></div>
+
+<header class="bar">
+  <a class="brand" href="#top" aria-label="Sonday Creatives, top of page">
+    <img class="lgN" src="assets/logo/logo-white.png" alt="Sonday Creatives" width="45" height="38">
+    <img class="lgD" src="assets/logo/logo-black.png" alt="" width="45" height="38">
+  </a>
+  <nav class="mono" aria-label="Sections">
+    <a href="#work">Work</a><a href="#photos">Photos</a><a href="#reels">Reels</a><a href="#films">Films</a><a href="#services">Services</a><a href="#contact">Contact</a>
+  </nav>
+  <span class="clock mono" id="clock" aria-label="Nairobi time">NBO --:--</span>
+  <div class="tog mono" role="group" aria-label="Theme">
+    <button type="button" id="tNight" aria-pressed="true">Night</button>
+    <button type="button" id="tDay" aria-pressed="false">Day</button>
+  </div>
+</header>
+
+<div class="mq mono" aria-hidden="true"><div id="mq"></div></div>
+
+<main id="top">
+  <section class="wrap hero" aria-roledescription="carousel" aria-label="Featured frames">
+    <div class="l">
+      <h1>Events,<br><em>seen.</em></h1>
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <p>Event photography and videography for conferences, associations and launches across Kenya. Daily selects the same evening. Highlight reels within 24 hours.</p>
+        <div class="cta"><a class="btn fill" href="#contact">Book coverage</a><a class="btn" href="#reels">Watch reels</a></div>
+      </div>
+    </div>
+    <div class="show" id="show">
+      <div id="heroFr"></div>
+      <div class="meta mono mut"><span id="hCap">Frame</span><span id="hEv"></span><span id="hCt">01 / 06</span></div>
+      <div class="pips" id="pips"></div>
+    </div>
+  </section>
+
+  <div class="stats mono">
+    <div><b>4</b>Core team</div>
+    <div><b>20+</b>Trusted freelancers</div>
+    <div><b>24h</b>Highlight reel</div>
+    <div><b>15–20</b>Edited selects a day</div>
+  </div>
+
+  <section class="sec wrap" id="work">
+    <div class="sec-h"><h2>Work index</h2><span class="mono mut">Tap a row to open</span></div>
+    <div class="idx" id="idx"></div>
+  </section>
+
+  <section class="sec wrap" id="photos">
+    <div class="sec-h"><h2>Photographs</h2><div class="chips mono" id="chips"></div></div>
+    <div class="wall" id="wall"></div>
+  </section>
+
+  <section class="sec wrap" id="reels">
+    <div class="sec-h"><h2>Reels</h2><span class="mono mut">Tap to play here</span></div>
+    <div class="rail" id="rail"></div>
+  </section>
+
+  <section class="sec wrap" id="films">
+    <div class="sec-h"><h2>Documentary films</h2><span class="mono mut">Plays on this page</span></div>
+    <div class="films" id="filmGrid"></div>
+  </section>
+
+  <section class="sec wrap" id="services">
+    <div class="sec-h"><h2>Services</h2><span class="mono mut">What we cover</span></div>
+    <div class="svc" id="svc"></div>
+    <div class="how">
+      <div><h3>Consent first</h3><p>Participants sign consent forms at registration. Anyone can ask us to delete or exclude images of them.</p></div>
+      <div><h3>Colour-coded tags</h3><p>People who do not want to be photographed wear a distinct tag, so the crew keeps them out of frame.</p></div>
+      <div><h3>Protected spaces</h3><p>Healing circles, wellness sessions and legal clinics are covered only when the client and participants agree.</p></div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="clients">
+    <div class="sec-h"><h2>Worked with</h2></div>
+    <div class="cl"><span>Law Society of Kenya, Nairobi Branch</span><span>Federation of Women Lawyers</span><span>Prism Network Solutions</span><span>Kenya Red Cross</span><span>Change a Life Initiative</span></div>
+  </section>
+
+  <section class="sec wrap" id="contact">
+    <div class="ct">
+      <h2>Book<br><em style="font-style:normal;color:var(--acc)">us.</em></h2>
+      <div class="r">
+        <div><span class="mut">Contact</span><b>Ryan Wangari</b></div>
+        <div><span class="mut">Email</span><b id="mail">Sondaycreatives@gmail.com</b></div>
+        <div><span class="mut">Send a brief</span><span><a class="btn mono" id="mailBtn" href="mailto:Sondaycreatives@gmail.com?subject=Event%20coverage%20enquiry">Open email</a> <button type="button" class="btn mono" id="copyBtn">Copy</button></span></div>
+        <p class="mut">Tell us the dates, venue and number of rooms. We reply with a coverage plan and shot list.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap foot mono">
+    <a href="#top" aria-label="Back to top"><img class="lgN ftlogo" src="assets/logo/logo-white.png" alt="Sonday Creatives"><img class="lgD ftlogo" src="assets/logo/logo-color.png" alt=""></a>
+    <span>© Sonday Creatives · Kenya</span>
+  </footer>
+</main>
+
+<div class="pv" id="pv" aria-hidden="true"></div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="t mono"><span id="lbCt">01 / 12</span><button type="button" id="lbX" class="mono">Close · Esc</button></div>
+  <div class="st" id="lbSt"></div>
+  <div class="bt mono"><button type="button" id="lbP" class="mono">← Prev</button><span id="lbCap" class="mut"></span><button type="button" id="lbN" class="mono">Next →</button></div>
+</div>
+
+<div class="pm" id="pm" hidden role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="box" id="pmBox">
+    <div class="hd mono"><b id="pmT"></b><button type="button" id="pmX" class="mono">Close · Esc</button></div>
+    <div class="vp" id="pmV"></div>
+    <div class="ft mono"><span id="pmS"></span><a id="pmL" href="#" target="_blank" rel="noopener">Open original ↗</a></div>
+  </div>
+</div>
+<script>
+(function(){
+/* ===== EDIT HERE =====
+   IMG(key) -> assets/img/key.jpg (full) and key-s.jpg (thumbnail).
+   REELS: add  id:'<tiktok video id>'  to skip the resolver, thumb:'assets/img/x.jpg' for a poster,
+          mp4:'assets/video/x.mp4' for a silent hover preview and native playback.
+   FILMS: YouTube video ids. */
+var DIM={"prism-booth": [1800, 1351], "prism-cake": [1800, 1351], "prism-cake2": [1800, 1351], "prism-room": [1800, 1351], "prism-wall": [1800, 1200], "prism-duo": [1800, 1200], "prism-night": [1200, 1800], "lsk-diani-1": [1400, 933], "fida-group": [1400, 933], "lsk-diani-2": [1400, 933], "fida-frame": [1400, 933], "lsk-diani-3": [1400, 933], "fida-lanyards": [1400, 912], "diani-evening": [1400, 933]};
+var PHOTOS=[
+ {k:'prism-booth',cat:'Launch',cap:'Photo frame booth',ev:'Prism launch'},
+ {k:'fida-group',cat:'Conference',cap:'Group photo, members’ conference',ev:'FIDA Kenya'},
+ {k:'prism-cake',cat:'Launch',cap:'Cake cutting',ev:'Prism launch'},
+ {k:'diani-evening',cat:'Social',cap:'Evening networking',ev:'Diani'},
+ {k:'fida-frame',cat:'Conference',cap:'Photo frame, women’s rights',ev:'FIDA Kenya'},
+ {k:'prism-room',cat:'Launch',cap:'The room, wide',ev:'Prism launch'},
+ {k:'lsk-diani-1',cat:'Conference',cap:'Delegates at registration',ev:'LSK Annual Conference'},
+ {k:'prism-wall',cat:'Portrait',cap:'Step-and-repeat',ev:'Prism launch'},
+ {k:'lsk-diani-2',cat:'Conference',cap:'Delegates, exhibition floor',ev:'LSK Annual Conference'},
+ {k:'prism-night',cat:'Portrait',cap:'Evening portrait',ev:'Prism launch'},
+ {k:'fida-lanyards',cat:'Conference',cap:'Members in lanyards',ev:'FIDA Kenya'},
+ {k:'prism-duo',cat:'Portrait',cap:'Partner portraits',ev:'Prism launch'},
+ {k:'lsk-diani-3',cat:'Conference',cap:'Exhibitor stand',ev:'LSK Annual Conference'}
+];
+var HERO=['prism-booth','fida-group','prism-cake','diani-evening','fida-frame','prism-room'];
+var REELS=[
+ {t:'Annual LSK Conference Week, Diani',url:'https://www.instagram.com/reel/DcBfFqSI9NH/?obrf=bTVma2IxemcwN2ti',code:'DcBfFqSI9NH'},
+ {t:'Federation of Women Lawyers event',url:'https://www.instagram.com/reel/Db7P1NXoz6x/?vrfl=Zzh5bWdmNGxreDV3',code:'Db7P1NXoz6x'},
+ {t:'LSK Nairobi Branch game night',url:'https://vt.tiktok.com/ZSgqcj2uS/'},
+ {t:'Commissioner Jacqueline Ingutiah, games day announcement',url:'https://vt.tiktok.com/ZSgqc73ck/'},
+ {t:'LSK Nairobi Branch Zumba and networking',url:'https://vt.tiktok.com/ZSgq3j7k2/'},
+ {t:'LSK Nairobi Branch games day',url:'https://vt.tiktok.com/ZSgq3FoJS/'}
+];
+var FILMS=[['IMKjiavn5bw','Documentary 01'],['0K9saJBkW4g','Documentary 02'],['m27qc7f_S18','Documentary 03'],['RkjbSRFnRJQ','Documentary 04']];
+var WORK=[
+ {t:'Prism Network Solutions launch',k:'Corporate launch',loc:'Kenya',imgs:['prism-booth','prism-cake','prism-room']},
+ {t:'Annual LSK Conference Week',k:'Conference',loc:'Diani',imgs:['lsk-diani-1','lsk-diani-2','lsk-diani-3'],reel:0},
+ {t:'FIDA Kenya members’ conference',k:'Conference',loc:'Kenya',imgs:['fida-group','fida-frame','fida-lanyards'],reel:1},
+ {t:'LSK Nairobi Branch game night',k:'Social',loc:'Nairobi',imgs:[],reel:2},
+ {t:'Games day announcement',k:'Video',loc:'Nairobi',imgs:[],reel:3},
+ {t:'Zumba and networking',k:'Social',loc:'Nairobi',imgs:[],reel:4},
+ {t:'LSK Nairobi Branch games day',k:'Social',loc:'Nairobi',imgs:[],reel:5}
+];
+var SERVICES=[
+ ['Event photography',['Room-by-room coverage of sessions, side events, exhibitions and cultural evenings.','15 to 20 edited, high-resolution selects each day, delivered the same evening or next morning.','Optional photobooth with a branded backdrop and an easy download link.']],
+ ['Event videography',['Key sessions, ceremonies, dialogues and performances filmed by assigned crew.','15 to 25 short interviews and testimonials in quiet, well-lit spaces.','Clean speech from lapel microphones, plus B-roll and ambient sound.']],
+ ['Highlight reels',['A daily highlight reel within 24 hours of each event day.','Cut for Instagram, TikTok and the client website.','Captions and branding agreed before the event.']],
+ ['Full recording and livestream',['Full programme recording with HyperDeck recorders.','A session-by-session archive for people who could not attend.','Livestream of opening and closing ceremonies, agreed in advance.']],
+ ['Documentation and reporting',['Rapporteuring and written event reports.','Documentary filmmaking for programmes and campaigns.','Photo and video libraries organised for reports and publications.']],
+ ['Design and motion',['Graphic design for social media, banners and reports.','Motion animation and lower thirds.','Social media management for event campaigns.']]
+];
+var GR=[['#FF2D55','#5E2B97'],['#FF7A00','#FF2D55'],['#0082CA','#5E2B97'],['#FFD600','#FF7A00'],['#88D645','#0082CA'],['#5E2B97','#0D1117']];
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function pad(n){return String(n).padStart(2,'0')}
+function ratio(k){var d=DIM[k];return d?d[0]+'/'+d[1]:'3/2'}
+function ph(i,label,tag,r){var g=GR[i%GR.length];return '<div class="ph" style="--g:linear-gradient('+((i*47+20)%180)+'deg,'+g[0]+','+g[1]+')"><b>'+esc(tag)+'</b><span>'+esc(label)+'</span><span>'+esc(r||'')+'</span></div>'}
+function fr(k,label,o){o=o||{};var r=o.ratio||ratio(k);
+  return '<div class="fr" style="aspect-ratio:'+r+'" role="img" aria-label="'+esc(label)+'"><img src="assets/img/'+k+(o.full?'':'-s')+'.jpg" alt="" '+(o.eager?'':'loading="lazy" ')+'style="object-position:'+(o.pos||'50% 35%')+'"></div>'}
+
+// marquee
+var words=['Event photography','Event videography','Highlight reels in 24 hours','Livestream','Documentation','Motion and design'],m='';
+for(var q=0;q<2;q++)words.forEach(function(w){m+='<span>'+w+'</span>'});
+document.getElementById('mq').innerHTML=m+m;
+
+// clock
+function tick(){try{document.getElementById('clock').textContent='NBO '+new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'Africa/Nairobi'}).format(new Date())}catch(e){}}
+tick();setInterval(tick,30000);
+
+// hero
+var byK={};PHOTOS.forEach(function(p){byK[p.k]=p});
+var H=HERO.map(function(k){return byK[k]}),hi=0,ht=null,D=4500;
+var pips=document.getElementById('pips'),show=document.getElementById('show');
+pips.style.setProperty('--d',D+'ms');
+pips.innerHTML=H.map(function(p,i){return '<button type="button" aria-label="Show frame '+(i+1)+'"><i></i></button>'}).join('');
+function hshow(n){hi=(n+H.length)%H.length;var p=H[hi];
+  document.getElementById('heroFr').innerHTML=fr(p.k,p.cap,{ratio:'3/2',full:true,eager:true,pos:'50% 30%'});
+  document.getElementById('hCap').textContent=p.cap;document.getElementById('hEv').textContent=p.ev;
+  document.getElementById('hCt').textContent=pad(hi+1)+' / '+pad(H.length);
+  [].forEach.call(pips.children,function(b,i){b.classList.remove('on');if(i===hi){void b.offsetWidth;b.classList.add('on')}});}
+function hstart(){clearInterval(ht);ht=setInterval(function(){hshow(hi+1)},D)}
+[].forEach.call(pips.children,function(b,i){b.addEventListener('click',function(){hshow(i);hstart()})});
+show.addEventListener('mouseenter',function(){pips.classList.add('paused');clearInterval(ht)});
+show.addEventListener('mouseleave',function(){pips.classList.remove('paused');hshow(hi);hstart()});
+document.addEventListener('visibilitychange',function(){document.hidden?clearInterval(ht):hstart()});
+hshow(0);hstart();
+
+// ===== player =====
+var pm=document.getElementById('pm'),pmV=document.getElementById('pmV'),pmBox=document.getElementById('pmBox'),pmLast=null;
+var ttCache={};
+function resolveTT(url){if(ttCache[url])return ttCache[url];
+  return ttCache[url]=fetch('/api/resolve?u='+encodeURIComponent(url)).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){if(!j.id)throw 0;return j})}
+function pmFallback(msg,url){pmV.innerHTML='<div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:1.5rem;color:#fff;font-size:13px">'+esc(msg)+'</div>'}
+function openPlayer(o){pmLast=document.activeElement;
+  document.getElementById('pmT').textContent=o.t;document.getElementById('pmS').textContent=o.src;
+  var l=document.getElementById('pmL');l.href=o.url;l.textContent='Open on '+o.src+' ↗';
+  pmBox.style.setProperty('--w',o.w||'420px');pmV.style.setProperty('--ar',o.ar||'9/16');pmV.innerHTML='';
+  pm.hidden=false;document.body.style.overflow='hidden';document.getElementById('pmX').focus();clearInterval(ht);
+  var f;
+  if(o.kind==='mp4'){pmV.innerHTML='<video src="'+esc(o.mp4)+'" controls autoplay playsinline loop></video>'}
+  else if(o.kind==='yt'){pmV.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+o.id+'?autoplay=1&rel=0" title="'+esc(o.t)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'}
+  else if(o.kind==='ig'){pmV.innerHTML='<iframe src="https://www.instagram.com/reel/'+o.id+'/embed/" title="'+esc(o.t)+'" allow="autoplay; encrypted-media; fullscreen" allowfullscreen scrolling="no"></iframe>'}
+  else if(o.kind==='tt'){
+    var go=function(id){pmV.innerHTML='<iframe src="https://www.tiktok.com/player/v1/'+id+'?autoplay=1&loop=1&music_info=1&description=1" title="'+esc(o.t)+'" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>'};
+    if(o.id)go(o.id);else{pmFallback('Loading from TikTok…');resolveTT(o.url).then(function(j){go(j.id)},function(){pmFallback('This preview needs the site to be live on Cloudflare Pages. Use the link below to watch on TikTok.')})}
+  }
+}
+function closePlayer(){pmV.innerHTML='';pm.hidden=true;document.body.style.overflow='';if(pmLast)pmLast.focus();hstart()}
+document.getElementById('pmX').onclick=closePlayer;
+pm.addEventListener('click',function(e){if(e.target===pm)closePlayer()});
+function reelOpts(r){var ig=r.url.indexOf('instagram')>-1;
+  return r.mp4?{kind:'mp4',mp4:r.mp4,t:r.t,url:r.url,src:ig?'Instagram':'TikTok'}:ig?{kind:'ig',id:r.code,t:r.t,url:r.url,src:'Instagram',ar:'9/17'}:{kind:'tt',id:r.id,url:r.url,t:r.t,src:'TikTok'}}
+
+// ===== work index =====
+var pv=document.getElementById('pv'),idx=document.getElementById('idx');
+function wFrame(w,i,j){var k=w.imgs[j%Math.max(w.imgs.length,1)];return k?fr(k,w.t,{ratio:'3/2'}):'<div class="fr" style="aspect-ratio:3/2">'+ph(i+j,w.t,'REEL','3:2')+'</div>'}
+idx.innerHTML=WORK.map(function(w,i){var r=w.reel!=null?REELS[w.reel]:null,fs=w.imgs.length?w.imgs.map(function(k){return fr(k,w.t,{ratio:'3/2'})}).join(''):'<div class="fr" style="aspect-ratio:3/2;grid-column:span 3">'+ph(i,w.t,'REEL','Video only')+'</div>';
+ return '<div class="ir" data-i="'+i+'"><button type="button" aria-expanded="false"><span class="mono mut">'+pad(i+1)+'</span><h3>'+esc(w.t)+'</h3><span class="mono mut c3">'+esc(w.k)+'</span><span class="mono mut c4">'+esc(w.loc)+'</span><span class="pl" aria-hidden="true">+</span></button><div class="det">'+fs+'<div class="lk mono"><span class="mut">'+esc(w.k)+' · '+esc(w.loc)+'</span>'+(r?'<button type="button" class="pl-btn" data-reel="'+w.reel+'" style="border-bottom:1px solid var(--fg)">Play the reel ▶</button>':'<span class="mut">Photo gallery below</span>')+'</div></div></div>'}).join('');
+idx.addEventListener('click',function(e){var pb=e.target.closest('[data-reel]');if(pb){openPlayer(reelOpts(REELS[+pb.dataset.reel]));return}
+  var b=e.target.closest('.ir>button');if(!b)return;var row=b.parentNode,o=row.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+idx.addEventListener('mousemove',function(e){var row=e.target.closest('.ir');if(!row||row.classList.contains('open')){pv.classList.remove('on');return}
+  var i=+row.dataset.i;if(pv.dataset.i!=i){pv.dataset.i=i;pv.innerHTML=wFrame(WORK[i],i,0)}
+  pv.style.left=Math.min(e.clientX+150,innerWidth-120)+'px';pv.style.top=e.clientY+'px';pv.classList.add('on')});
+idx.addEventListener('mouseleave',function(){pv.classList.remove('on')});
+
+// ===== photo wall + lightbox =====
+var cats=['All'].concat(PHOTOS.map(function(p){return p.cat}).filter(function(c,i,a){return a.indexOf(c)===i})),cat='All',vis=[],li=0;
+var chips=document.getElementById('chips'),wall=document.getElementById('wall');
+chips.innerHTML=cats.map(function(c){return '<button type="button" aria-pressed="'+(c==='All')+'" data-c="'+c+'">'+c+'</button>'}).join('');
+function renderWall(){vis=PHOTOS.filter(function(p){return cat==='All'||p.cat===cat});
+  wall.innerHTML=vis.map(function(p,n){return '<button type="button" data-n="'+n+'" aria-label="Open '+esc(p.cap)+'">'+fr(p.k,p.cap)+'<span class="cap mono">'+esc(p.cap)+' · '+esc(p.ev)+'</span></button>'}).join('')}
+chips.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;cat=b.dataset.c;[].forEach.call(chips.children,function(x){x.setAttribute('aria-pressed',x===b)});renderWall()});
+renderWall();
+var lb=document.getElementById('lb'),last=null;
+function lshow(n){li=(n+vis.length)%vis.length;var p=vis[li];document.getElementById('lbSt').innerHTML=fr(p.k,p.cap,{full:true,eager:true});
+  var f=document.querySelector('#lbSt .fr');f.style.height='100%';f.style.width='auto';
+  document.getElementById('lbCt').textContent=pad(li+1)+' / '+pad(vis.length);document.getElementById('lbCap').textContent=p.cap+' · '+p.ev}
+wall.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;last=b;lb.hidden=false;document.body.style.overflow='hidden';lshow(+b.dataset.n);document.getElementById('lbX').focus()});
+function lclose(){lb.hidden=true;document.body.style.overflow='';if(last)last.focus()}
+document.getElementById('lbX').onclick=lclose;document.getElementById('lbP').onclick=function(){lshow(li-1)};document.getElementById('lbN').onclick=function(){lshow(li+1)};
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(!pm.hidden)closePlayer();else if(!lb.hidden)lclose();return}if(lb.hidden)return;if(e.key==='ArrowLeft')lshow(li-1);if(e.key==='ArrowRight')lshow(li+1)});
+
+// ===== reels =====
+var rail=document.getElementById('rail');
+rail.innerHTML=REELS.map(function(r,i){var ig=r.url.indexOf('instagram')>-1,g=GR[i%6];
+ return '<button type="button" class="reel" data-r="'+i+'" aria-label="Play '+esc(r.t)+'"><div class="fr" style="aspect-ratio:9/16"><div class="ph" style="--g:linear-gradient('+((i*37+160)%360)+'deg,'+g[0]+','+g[1]+')"><b>REEL '+pad(i+1)+'</b><span>'+(ig?'Instagram':'TikTok')+'</span></div>'+(r.thumb?'<img class="th" src="'+esc(r.thumb)+'" alt="">':'')+(r.mp4?'<video class="vid" src="'+esc(r.mp4)+'" muted loop playsinline preload="none"></video>':'')+'<div class="sweep"></div><div class="pb"><i>▶</i></div><span class="tag mono">'+(ig?'IG':'TT')+'</span></div><h3>'+esc(r.t)+'</h3></button>'}).join('');
+rail.addEventListener('click',function(e){var b=e.target.closest('.reel');if(b)openPlayer(reelOpts(REELS[+b.dataset.r]))});
+[].forEach.call(rail.querySelectorAll('.reel'),function(c){var v=c.querySelector('video');if(!v)return;c.addEventListener('mouseenter',function(){v.play().catch(function(){})});c.addEventListener('mouseleave',function(){v.pause();v.currentTime=0})});
+// TikTok posters from the resolver (only works when /api/resolve exists)
+REELS.forEach(function(r,i){if(r.url.indexOf('tiktok')<0||r.thumb)return;resolveTT(r.url).then(function(j){r.id=j.id;if(!j.thumbnail)return;var c=rail.querySelector('[data-r="'+i+'"] .fr');if(!c)return;var im=new Image();im.className='th';im.alt='';im.referrerPolicy='no-referrer';im.onload=function(){c.insertBefore(im,c.querySelector('.sweep'))};im.src=j.thumbnail},function(){})});
+
+// ===== films =====
+document.getElementById('filmGrid').innerHTML=FILMS.map(function(f,i){var g=GR[(i+2)%6];
+ return '<button type="button" class="film" data-f="'+i+'" aria-label="Play '+esc(f[1])+'"><div class="fr"><div class="ph" style="--g:linear-gradient('+(i*60+30)+'deg,'+g[0]+','+g[1]+')"><b>FILM '+pad(i+1)+'</b><span>16:9</span></div><img src="https://i.ytimg.com/vi/'+f[0]+'/hqdefault.jpg" alt="" referrerpolicy="no-referrer" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"><div class="pb"><i>▶</i></div></div><h3>'+esc(f[1])+'</h3></button>'}).join('');
+document.getElementById('filmGrid').addEventListener('click',function(e){var b=e.target.closest('.film');if(!b)return;var f=FILMS[+b.dataset.f];openPlayer({kind:'yt',id:f[0],t:f[1],url:'https://www.youtube.com/watch?v='+f[0],src:'YouTube',ar:'16/9',w:'min(100%,960px)'})});
+
+// ===== services =====
+var svc=document.getElementById('svc');
+svc.innerHTML=SERVICES.map(function(s,i){return '<details'+(i===0?' open':'')+'><summary>'+s[0]+'</summary><div class="b">'+s[1].map(function(x){return '<p>'+x+'</p>'}).join('')+'</div></details>'}).join('');
+svc.addEventListener('toggle',function(e){if(e.target.open)[].forEach.call(svc.querySelectorAll('details'),function(d){if(d!==e.target)d.open=false})},true);
+
+// scroll progress + active nav
+var prog=document.getElementById('prog'),links=[].slice.call(document.querySelectorAll('.bar nav a'));
+function onS(){var h=document.documentElement.scrollHeight-innerHeight;prog.style.transform='scaleX('+(h>0?scrollY/h:0)+')';
+  links.forEach(function(a){var s=document.querySelector(a.getAttribute('href'));if(!s)return;var r=s.getBoundingClientRect();a.classList.toggle('on',r.top<innerHeight*.4&&r.bottom>innerHeight*.4)})}
+addEventListener('scroll',onS,{passive:true});onS();
+
+// theme
+var root=document.documentElement,tN=document.getElementById('tNight'),tD=document.getElementById('tDay');
+function setT(t){root.setAttribute('data-theme',t);tN.setAttribute('aria-pressed',t==='dark');tD.setAttribute('aria-pressed',t==='light');try{localStorage.setItem('sonday-theme',t)}catch(e){}}
+var saved=null;try{saved=localStorage.getItem('sonday-theme')}catch(e){}
+if(saved)setT(saved);else if(matchMedia('(prefers-color-scheme: light)').matches)setT('light');
+tN.onclick=function(){setT('dark')};tD.onclick=function(){setT('light')};
+
+// copy
+var cb=document.getElementById('copyBtn');
+cb.addEventListener('click',function(){var el=document.getElementById('mail');function sel(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);cb.textContent='Selected'}
+ try{navigator.clipboard.writeText(el.textContent).then(function(){cb.textContent='Copied'},sel)}catch(x){sel()}});
+})();
+</script>
+</body>
+</html>
